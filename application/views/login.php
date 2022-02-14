@@ -57,6 +57,15 @@
           <div class="card bg-secondary border-0 mb-0">
             <div class="card-body px-lg-5 py-lg-5">
               <form role="form" action="<?= site_url('auth/login') ?>" method="post">
+                <!-- <div class="form-group mb-3">
+                  <select name="" id="" class="form-control">
+                    <option value="" selected disabled> Pilih Lembaga</option>
+                    <?php foreach($lembaga->result() as $row){ ?>
+                      <option value="<?= $row->id ?>"><?= $row->nama ?></option>
+                    <?php } ?>
+                  </select>
+                </div> -->
+                <input type="hidden" name="idlembaga" value="1">
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
@@ -95,7 +104,7 @@
       <div class="row align-items-center justify-content-xl-between">
         <div class="col-xl-6">
           <div class="copyright text-center text-xl-left text-muted">
-            &copy; <?= date('Y') ?>
+            <!-- &copy; <?= date('Y') ?> -->
           </div>
         </div>
       </div>

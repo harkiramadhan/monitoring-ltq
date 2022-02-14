@@ -19,11 +19,11 @@ class Welcome extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	function index(){
-		$this->load->view('welcome_message');
-	}
+		$var = [
+			'lembaga' => $this->db->get('lembaga')
+		];
 
-	function login(){
-		$this->load->view('login');
+		$this->load->view('login', $var);
 	}
 
 	function register(){
