@@ -6,4 +6,11 @@ class Mtahunajar extends CI_Model{
         }
         return $this->db->get('tahunajar');
     }
+
+    function getActiveLembaga($idlembaga){
+        return $this->db->get_where('tahunajar', [
+            'id_lembaga' => $idlembaga,
+            'status' => 1
+        ])->row();
+    }
 }

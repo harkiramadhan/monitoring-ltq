@@ -88,7 +88,7 @@ class Tahunajar extends CI_Controller{
                 $this->session->set_flashdata('sukses', "Tahunajar Berhasil Di Tambahkan");
                 redirect($_SERVER['HTTP_REFERER']);
             }else{
-                $this->session->set_flashdata('sukses', "Error Gagal Di Tambahkan");
+                $this->session->set_flashdata('sukses', "Tahunajar Gagal Di Tambahkan");
                 redirect($_SERVER['HTTP_REFERER']);
             }
         }
