@@ -177,7 +177,7 @@ class Kelas extends CI_Controller{
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="exampleFormControlSelect1">Guru <small class="text-danger">*</small></label>
-                                            <select name="id_guru" class="form-control form-control-lg" id="exampleFormControlSelect1" required>
+                                            <select name="id_guru" class="form-control" id="exampleFormControlSelect1" required>
                                                 <option value="" disabled>- Pilih Guru</option>
                                                 <?php foreach($guru->result() as $rg){ ?>
                                                     <option <?= ($rg->id == $kelas->id_guru) ? 'selected' : '' ?> value="<?= $rg->id ?>"><?= $rg->nama ?></option>

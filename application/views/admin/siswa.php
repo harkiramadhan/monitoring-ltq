@@ -4,20 +4,23 @@
             <div class="card-header pb-0 px-3">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h6 class="mb-0"><strong>Daftar Kelas</strong></h6>
+                        <h6 class="mb-0"><strong>Daftar Siswa</strong></h6>
                     </div>
                     <div class="col-lg-4 text-end">
-                        <button class="btn btn-sm btn-round bg-gradient-dark mb-0" type="button" data-bs-toggle="modal" data-bs-target="#addKelas"><i class="fas fa-plus me-3" aria-hidden="true"></i>Kelas</button>
+                        <button class="btn btn-sm btn-round bg-gradient-dark mb-0" type="button" data-bs-toggle="modal" data-bs-target="#addSiswa"><i class="fas fa-plus me-3" aria-hidden="true"></i>Siswa</button>
                     </div>
                 </div>
             </div>
             <div class="card-body pt-4 p-3">
                 <ul class="list-group">
-                    <?php foreach($kelas->result() as $row){ ?>
+                    <?php foreach($siswa->result() as $row){ ?>
                         <li class="list-group-item border-0 d-flex p-2 mb-2 bg-gray-100 border-radius-lg">
                             <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 ms-2 text-sm"><strong><?= $row->kelas ?></strong></h6>
-                                <small class="mb-0 ms-2 text-sm"><?= $row->nama ?></small>
+                                <h6 class="mb-0 ms-2 text-sm"><strong><?= $row->nama ?></strong></h6>
+                                <small class="mb-0 ms-2 text-sm"><?= @$row->kelas ?>Kelas 1</small>
+                            </div>
+                            <div class="ms-auto text-end">
+                                <h6 class="mb-0 m-2 text-sm"><strong><?= $row->jenkel ?></strong></h6>
                             </div>
                             <div class="ms-auto text-end">
                                 <button type="button" class="btn btn-sm btn-round btn-info text-white px-3 mb-0 btn-edit" data-id="<?= $row->id ?>"><i class="fas fa-pencil-alt me-2" aria-hidden="true"></i>Edit</button>
@@ -42,7 +45,7 @@
             <div class="modal-body p-0">
                 <div class="card card-plain">
                     <div class="card-header pb-0 text-left">
-                        <h5 class="font-weight-bolder">Tambah Kelas</h5>
+                        <h5 class="font-weight-bolder">Tambah Siswa</h5>
                     </div>
                     <div class="card-body pb-0">
                         <form action="<?= site_url('kelas/create') ?>" role="form text-left" method="post">
@@ -81,7 +84,7 @@
 </div>
 
 <!-- Modal Edit -->
-<div class="modal fade" id="editSiswa" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+<div class="modal fade" id="editKelas" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content modal-content-edit">
 
