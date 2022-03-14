@@ -21,14 +21,15 @@ class Kelas extends CI_Controller{
         $idlembaga = $this->session->userdata('idlembaga');
         $role = $this->session->userdata('role');
         $roleString = $this->session->userdata('role_string');
+        $tahunajar = $this->Mtahunajar->getActiveLembaga($idlembaga);
 
         $var = [
             'title' => 'Kelas',
             'user' => $this->Muser->getSelected($userid),
             'lembaga' => $this->Mlembaga->getSelected($idlembaga),
-            'kelas' => $this->Mkelas->getByLembaga($idlembaga),
+            'tahunajar' => $tahunajar,
+            'kelas' => $this->Mkelas->getByLembaga($idlembaga, $tahunajar->id),
             'guru' => $this->Mguru->getByLembaga($idlembaga),
-            'tahunajar' => $this->Mtahunajar->getActiveLembaga($idlembaga),
             'ajax' => [
                 'ajax_kelas'
             ]
@@ -139,7 +140,15 @@ class Kelas extends CI_Controller{
                 <script>
                     $('.btn-addSiswa').click(function(){
                         var idkelas = $(this).attr('data-id')
-                        alert(idkelas)
+                        $.ajax({
+                            url: '<?= site_url('kelas/modalAddSiswa') ?>',
+                            type: 'post',
+                            data : {idkelas : idkelas},
+                            success: function(res){
+                                $('.modal-content-add').html(res)
+                                $('#editSiswa').modal('show')
+                            }
+                        })
                     })
                 </script>
             <?php 
@@ -193,7 +202,7 @@ class Kelas extends CI_Controller{
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-sm btn-round bg-success btn-lg w-100 mt-4 mb-0 text-white">Simpan</button>
+                                    <button type="submit" class="btn btn-sm btn-round bg-success btn-lg w-100 mt-4 mb-0 text-white"><i class="fas fa-save me-2"></i>Simpan</button>
                                 </div>
                             </form>
                         </div>
@@ -203,6 +212,129 @@ class Kelas extends CI_Controller{
                     </div>
                 </div>
             <?php
+        }
+    }
+
+    function modalAddSiswa(){
+        $idkelas = $this->input->post('idkelas', TRUE);
+        $idlembaga = $this->session->userdata('idlembaga', TRUE);
+        $tahunajar = $this->Mtahunajar->getActiveLembaga($idlembaga);
+        $idtahunajar = $tahunajar->id;
+        $siswaNotIn = $this->Mkelas->getSiswaNotIn($idtahunajar, $idlembaga);
+        $kelas = $this->Mkelas->getById($idkelas, $idlembaga)->row();
+
+        ?>
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left">
+                        <h5 class="">Tambah Siswa Kelas <br><strong><?= $kelas->kelas ?></strong></h5>
+                    </div>
+                    <div class="card-body pb-0">
+                        <form action="<?= site_url('kelas/addSiswa') ?>" role="form text-left" method="post">
+                            <input type="hidden" name="idtahunajar" value="<?= $tahunajar->id ?>">
+                            <input type="hidden" name="idkelas" value="<?= $idkelas ?>">
+                            
+                            <div class="form-group mb-0">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                    <input class="form-control" placeholder="Cari Siswa ..." id="myInputSearch" type="text">
+                                </div>
+                            </div>
+
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-4" width="5px">No</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-4" width="5px"></th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">L/P</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="myTableSearch">
+                                        <?php
+                                            $no = 1; 
+                                            foreach($siswaNotIn->result() as $row){ 
+                                        ?>
+                                        <tr>
+                                            <td class="text-center" width="5px">
+                                                <h6 class="mb-0 text-sm"><?= $no++ ?></h6>
+                                            </td>
+                                            <td width="5px" class="text-center">
+                                                <div class="form-check text-center">
+                                                    <input class="form-check-input" id="fcustomCheck<?= $row->id ?>" type="checkbox" name="idsiswa[]" value="<?= $row->id ?>">
+                                                    <label class="custom-control-label" for="customCheck<?= $row->id ?>"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm text-bolder"><?= $row->nama ?></h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-xs font-weight-bold"><?= $row->jenkel ?></span>
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-sm btn-round bg-success btn-lg w-100 mt-4 mb-0 text-white">Tambahkan</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                        <button type="button" class="btn btn-sm btn-link btn-block  ml-auto" data-bs-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                $("#myInputSearch").on("keyup", function() {
+                    var value = $(this).val().toLowerCase()
+                    $("#myTableSearch tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    })
+                })
+            </script>
+        <?php
+    }
+
+    function addSiswa(){
+        $idlembaga = $this->session->userdata('idlembaga', TRUE);
+        $idkelas = $this->input->post('idkelas', TRUE);
+        $idtahunajar = $this->input->post('idtahunajar', TRUE);
+        $idsiswa = $this->input->post('idsiswa[]', TRUE);
+
+        if(count($idsiswa) > 0){
+            foreach($idsiswa as $row){
+                $datas = [
+                    'id_lembaga' => $idlembaga,
+                    'id_siswa' => $row,
+                    'id_tahunajar' => $idtahunajar,
+                    'id_kelas' => $idkelas 
+                ];
+
+                $cek = $this->db->get_where('mutasi', [
+                    'id_lembaga' => $idlembaga,
+                    'id_siswa' => $row,
+                    'id_tahunajar' => $idtahunajar,
+                    'id_kelas' => $idkelas 
+                ]);
+                if($cek->num_rows() > 0){}else{
+                    $this->db->insert('mutasi', $datas);
+                }
+            }
+
+            $this->session->set_flashdata('sukses', "Siswa Berhasil Di Masukkan Kedalam Kelas");
+            redirect($_SERVER['HTTP_REFERER']);
+        }else{
+            $this->session->set_flashdata('error', "Tidak Ada Siswa Yang Di Pilih");
+            redirect($_SERVER['HTTP_REFERER']);
         }
     }
 }

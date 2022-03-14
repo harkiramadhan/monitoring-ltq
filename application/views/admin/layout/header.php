@@ -23,6 +23,7 @@
   <title><?= $title ?></title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="<?= base_url('/assets/css/style.css') ?>" rel="stylesheet" />
   <!-- Nucleo Icons -->
   <link href="<?= base_url('/assets/css/nucleo-icons.css') ?>" rel="stylesheet" />
   <link href="<?= base_url('/assets/css/nucleo-svg.css') ?>" rel="stylesheet" />
@@ -69,7 +70,7 @@
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
+            <span class="nav-link-text ms-1"><strong>Dashboard</strong></span>
           </a>
         </li>
         <li class="nav-item">
@@ -77,23 +78,15 @@
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Semester</span>
+            <span class="nav-link-text ms-1"><strong>Semester</strong></span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?= ($this->uri->segment(1) == 'kelas') ? 'active' : '' ?>" href="<?= site_url('kelas') ?>">
+          <a class="nav-link <?= ($this->uri->segment(1) == 'guru') ? 'active' : '' ?>" href="<?= site_url('guru') ?>">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Kelas</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?= ($this->uri->segment(1) == 'kegiatan') ? 'active' : '' ?>" href="<?= site_url('kegiatan') ?>">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Kegiatan</span>
+            <span class="nav-link-text ms-1"><strong>Guru</strong></span>
           </a>
         </li>
         <li class="nav-item">
@@ -101,26 +94,34 @@
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Siswa</span>
+            <span class="nav-link-text ms-1"><strong>Siswa</strong></span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?= ($this->uri->segment(1) == 'kelas') ? 'active' : '' ?>" href="<?= site_url('kelas') ?>">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1"><strong>Kelas</strong></span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?= ($this->uri->segment(1) == 'kegiatan') ? 'active' : '' ?>" href="<?= site_url('kegiatan') ?>">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-app text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1"><strong>Kegiatan</strong></span>
           </a>
         </li>
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?= ($this->uri->segment(1) == 'guru') ? 'active' : '' ?>" href="<?= site_url('guru') ?>">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Guru</span>
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link <?= ($this->uri->segment(1) == 'user') ? 'active' : '' ?>" href="<?= site_url('user') ?>">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">User</span>
+            <span class="nav-link-text ms-1"><strong>Pengguna</strong></span>
           </a>
         </li>
         <li class="nav-item">
@@ -128,7 +129,7 @@
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-spaceship text-dark text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Logout</span>
+            <span class="nav-link-text ms-1"><strong>Logout</strong></span>
           </a>
         </li>
       </ul>
@@ -138,6 +139,14 @@
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
+        <?php if($tahunajar): ?>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-2 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page"><h6 class="font-weight-bolder text-white mb-0">Semester Aktif</h6></li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0"><?= $tahunajar->tahun_awal."/".$tahunajar->tahun_akhir." - Semester ". $tahunajar->semester ?></h6>
+        </nav>
+        <?php endif; ?>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <!-- <div class="input-group">

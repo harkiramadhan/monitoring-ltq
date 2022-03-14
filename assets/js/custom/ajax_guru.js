@@ -15,7 +15,7 @@ $(document).ready(function(){
     $('.btn-detail').click(function(){
         var id = $(this).attr('data-id')
         $.ajax({
-            url: siteUrl + 'siswa/detail',
+            url: siteUrl + 'guru/detail',
             type: 'get',
             data: {id : id},
             success: function(res){

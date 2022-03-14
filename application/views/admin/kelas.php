@@ -12,6 +12,12 @@
                 </div>
             </div>
             <div class="card-body pt-4 p-3">
+                <div class="form-group mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                        <input class="form-control" placeholder="Cari Kelas ..." id="myInput" type="text">
+                    </div>
+                </div>
                 <ul class="list-group">
                     <?php foreach($kelas->result() as $row){ ?>
                         <li class="list-group-item border-0 d-flex p-2 mb-2 bg-gray-100 border-radius-lg">
@@ -36,7 +42,7 @@
 </div>
 
 <!-- Modals -->
-<div class="modal fade" id="addSiswa" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+<div class="modal fade" id="addKelas" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="modal-body p-0">
@@ -82,8 +88,8 @@
 
 <!-- Modal Edit -->
 <div class="modal fade" id="editSiswa" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-        <div class="modal-content modal-content-edit">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content modal-content-add">
 
         </div>
     </div>

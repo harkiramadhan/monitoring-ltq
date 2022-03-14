@@ -47,51 +47,13 @@ class Siswa extends CI_Controller{
         if($cekSiswa->num_rows() > 0){
             $siswa = $cekSiswa->row();
             ?>
-                <form action="<?= site_url('siswa/update') ?>" method="post" enctype="multipart/form-data">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row gx-4">
-                            <?php if($siswa->img != NULL): ?>
-                                <div class="col-auto">
-                                    <div class="avatar avatar-xl position-relative">
-                                        <img id="image-preview" alt="image preview" src="<?= base_url('uploads/img/siswa/' . $siswa->img) ?>" alt="profile_image" class="w-100 border-radius-lg shadow-sm mb-0" style="max-height: 100px!important">
-                                    </div>
-                                </div>
-                            <?php else: ?>
-                                <div class="col-auto">
-                                    <div class="avatar avatar-xl position-relative">
-                                        <img id="image-preview" alt="image preview" src="https://nkriku.com/wp-content/uploads/2022/02/infografis_20200913_NJ1572.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm mb-0" style="max-height: 100px!important">
-                                    </div>
-                                </div>
-                            <?php endif; ?>
-                            <div class="col-auto my-auto">
-                                <div class="h-100">
-                                    <h5 class="mb-1">
-                                        <?= $siswa->nama."&nbsp;&nbsp; / &nbsp;&nbsp;".$siswa->jenkel ?>
-                                    </h5>
-                                    <p class="mb-0 font-weight-bold text-sm">
-                                        Kelas 1
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <form action="<?= site_url('siswa/update/' . $idsiswa) ?>" method="post" enctype="multipart/form-data">
                 <div class="card mt-2">
                     <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <p class="mb-0">Informasi Siswa</p>
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group ms-auto input-group-sm">
-                                    <label for="example-text-input" class="form-control-label">Upload Foto</label>
-                                    <input type="file" id="image-source" name="img" class="form-control" aria-label="Upload" onchange="previewImage();" multiple accept="image/*">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Nama</label>
+                                    <label for="example-text-input" class="form-control-label">Nama <small class="text-danger">*</small></label>
                                     <input class="form-control" name="nama" type="nama" value="<?= $siswa->nama ?>" onfocus="focused(this)" onfocusout="defocused(this)" required>
                                 </div>
                             </div>
@@ -103,17 +65,22 @@ class Siswa extends CI_Controller{
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Jenis Kelamin</label>
-                                    <select name="jenkel" class="form-control" required>
-                                        <option value="" selected disabled>- Pilih Jenis Kelamin</option>
-                                        <option <?= ($siswa->jenkel == "L") ? 'selected' : '' ?> value="L"> Laki - Laki</option>
-                                        <option <?= ($siswa->jenkel == "P") ? 'selected' : '' ?> value="P"> Perempuan</option>
-                                    </select>
+                                    <label for="example-text-input" class="form-control-label">Jenis Kelamin <small class="text-danger">*</small></label>
+                                    <div class="input-group mb-3">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="jenkel" id="inlineRadio1" value="L" <?= ($siswa->jenkel == "L") ? 'checked' : '' ?> required>
+                                            <label class="form-check-label" for="inlineRadio1">Laki - Laki</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="jenkel" id="inlineRadio2" value="P" <?= ($siswa->jenkel == "P") ? 'checked' : '' ?> required>
+                                            <label class="form-check-label" for="inlineRadio2">Perempuan</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Tanggal Masuk</label>
+                                    <label for="example-text-input" class="form-control-label">Tanggal Masuk <small class="text-danger">*</small></label>
                                     <input class="form-control" name="tanggal_masuk" type="date" value="<?= $siswa->tanggal_masuk ?>" onfocus="focused(this)" onfocusout="defocused(this)" required>
                                 </div>
                             </div>
@@ -123,9 +90,22 @@ class Siswa extends CI_Controller{
                                     <input class="form-control" name="tanggal_keluar" type="date" value="<?= $siswa->tanggal_keluar ?>" onfocus="focused(this)" onfocusout="defocused(this)">
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <?php if($siswa->img): ?>
+                                    <img id="image-preview" src="<?= base_url('./uploads/img/siswa/' . $siswa->img) ?>" alt="Image placeholder" class="card-img-top">
+                                <?php else: ?>
+                                    <img id="image-preview" src="#" alt="Image placeholder" class="card-img-top d-none">
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group ms-auto input-group-sm">
+                                    <label for="example-text-input" class="form-control-label">Upload Foto</label>
+                                    <input type="file" id="image-source" name="img" class="form-control" aria-label="Upload" onchange="previewImage();" multiple accept="image/*">
+                                </div>
+                            </div>
                         </div>
                         <hr class="horizontal dark">
-                        <button type="submit" class="btn btn-sm btn-round bg-success btn-lg w-100 mb-0 text-white">Simpan</button>
+                        <button type="submit" class="btn btn-sm btn-round bg-success btn-lg w-100 mb-0 text-white btn-submit"><i class="fas fa-save me-2"></i>Simpan</button>
                     </div>
                 </div>
                 </form>
@@ -148,8 +128,79 @@ class Siswa extends CI_Controller{
         }
     }
 
-    function update(){
-        
-        
+    function create(){
+        $idlembaga = $this->session->userdata('idlembaga');
+        $config['upload_path'] = './uploads/img/siswa';
+        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+        if($this->upload->do_upload('img')){
+            $img = $this->upload->data();
+            $filename = $img['file_name'];
+        }else{
+            $filename = NULL;
+        }
+
+        $datas = [
+            'id_lembaga' => $idlembaga,
+            'nis' => $this->input->post('nis', TRUE),
+            'nama' => $this->input->post('nama', TRUE),
+            'jenkel' => $this->input->post('jenkel', TRUE),
+            'tanggal_masuk' => $this->input->post('tanggal_masuk', TRUE),
+            'tanggal_keluar' => $this->input->post('tanggal_keluar', TRUE),
+            'img' => $filename,
+            'status' => 1
+        ];
+        $this->db->insert('siswa', $datas);
+        if($this->db->affected_rows() > 0){
+            $this->session->set_flashdata('sukses', $this->input->post('nama', TRUE)." Berhasil Di Tambahkan");
+            redirect($_SERVER['HTTP_REFERER']);
+        }else{
+            $this->session->set_flashdata('error', $this->input->post('nama', TRUE)." Gagal Di Tambahkan");
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+    }
+
+    function update($idsiswa){
+        $idlembaga = $this->session->userdata('idlembaga');
+        $siswa = $this->Msiswa->getById($idsiswa, $idlembaga)->row();
+
+        $config['upload_path'] = './uploads/img/siswa';
+        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+        if($this->upload->do_upload('img')){
+            if($siswa->img == TRUE){
+                $path = './uploads/img/siswa/';
+                $fileName = $siswa->img;
+                unlink($path.$fileName);
+            }
+
+            $img = $this->upload->data();
+            $filename = $img['file_name'];
+        }else{
+            if($siswa->img == TRUE){
+                $filename = $siswa->img;
+            }else{
+                $filename = NULL;
+            }
+        }
+
+        $dataUpdate = [
+            'nis' => $this->input->post('nis', TRUE),
+            'nama' => $this->input->post('nama', TRUE),
+            'jenkel' => $this->input->post('jenkel', TRUE),
+            'tanggal_masuk' => $this->input->post('tanggal_masuk', TRUE),
+            'tanggal_keluar' => $this->input->post('tanggal_keluar', TRUE),
+            'img' => $filename
+        ];
+        $this->db->where('id', $idsiswa)->update('siswa', $dataUpdate);
+        if($this->db->affected_rows() > 0){
+            $this->session->set_flashdata('sukses', $this->input->post('nama', TRUE)." Berhasil Di Simpan");
+            redirect($_SERVER['HTTP_REFERER']);
+        }else{
+            $this->session->set_flashdata('error', $siswa->nama." Gagal Di Simpan");
+            redirect($_SERVER['HTTP_REFERER']);
+        }
     }
 }

@@ -13,7 +13,7 @@
             </div>
             <div class="card-body pt-4 p-3">
                 <ul class="list-group">
-                    <?php foreach($tahunajar->result() as $row){ ?>
+                    <?php foreach($tahunajar_res->result() as $row){ ?>
                         <li class="list-group-item border-0 d-flex p-2 mb-2 <?= ($row->status == 1) ? 'bg-success' : 'bg-gray-100' ?> border-radius-lg">
                             <div class="d-flex flex-column justify-content-center">
                                 <h6 class="mb-0 ms-3 text-sm <?= ($row->status == 1) ? 'text-white' : '' ?>"><strong><?= $row->tahun_awal."/".$row->tahun_akhir." - Semester ".$row->semester ?></strong></h6>
@@ -38,7 +38,7 @@
 
 <!-- Modals -->
 <div class="modal fade" id="addSemester" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="card card-plain">

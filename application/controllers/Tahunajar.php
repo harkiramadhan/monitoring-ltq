@@ -24,7 +24,8 @@ class Tahunajar extends CI_Controller{
             'title' => 'Semester',
             'user' => $this->Muser->getSelected($userid),
             'lembaga' => $this->Mlembaga->getSelected($idlembaga),
-            'tahunajar' => $this->Mtahunajar->getAll($idlembaga),
+            'tahunajar' => $this->Mtahunajar->getActiveLembaga($idlembaga),
+            'tahunajar_res' => $this->Mtahunajar->getAll($idlembaga),
             'ajax' => [
                 'ajax_tahunajar'
             ]
