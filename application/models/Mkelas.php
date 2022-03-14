@@ -29,6 +29,17 @@ class Mkelas extends CI_Model{
                         ])->get();
     }
 
+    function getSiswaKelas($idkelas, $idlembaga = FALSE){
+        return $this->db->select('s.nama, s.jenkel, k.kelas, m.*')
+                        ->from('mutasi m')
+                        ->join('siswa s', 'm.id_siswa = s.id')
+                        ->join('kelas k', 'm.id_kelas = k.id')
+                        ->where([
+                            'm.id_kelas' => $idkelas,
+                            's.id_lembaga' => $idlembaga
+                        ])->get();
+    }
+
     function getSiswaNotIn($idtahunajar, $idlembaga){
         return $this->db->select('s.*')
                         ->from('siswa s')

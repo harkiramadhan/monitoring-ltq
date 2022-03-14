@@ -87,6 +87,7 @@ class Kelas extends CI_Controller{
         $idkelas = $this->input->get('id', TRUE);
         $idlembaga = $this->session->userdata('idlembaga');
         $cekKelas = $this->Mkelas->getById($idkelas, $idlembaga);
+        $siswa = $this->Mkelas->getSiswaKelas($idkelas, $idlembaga);
         if($cekKelas->num_rows() > 0){
             $kelas = $cekKelas->row();
             ?>
@@ -115,24 +116,29 @@ class Kelas extends CI_Controller{
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php 
+                                    $no = 1;
+                                    foreach($siswa->result() as $row){
+                                ?>
                                 <tr>
                                     <td class="text-center" width="5px">
-                                        <h6 class="mb-0 text-sm">1</h6>
+                                        <h6 class="mb-0 text-sm"><?= $no++ ?></h6>
                                     </td>
                                     <td>
                                         <div class="d-flex">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm text-bolder">John Michael</h6>
+                                                <h6 class="mb-0 text-sm text-bolder"><?= $row->nama ?></h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                        <span class="text-secondary text-xs font-weight-bold"><?= $row->jenkel ?></span>
                                     </td>
                                     <td class="align-middle text-center" width="5px">
                                         <a class="btn btn-sm btn-round btn-link text-danger px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
