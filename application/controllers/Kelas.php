@@ -135,7 +135,7 @@ class Kelas extends CI_Controller{
                                         <span class="text-secondary text-xs font-weight-bold"><?= $row->jenkel ?></span>
                                     </td>
                                     <td class="align-middle text-center" width="5px">
-                                        <a class="btn btn-sm btn-round btn-link text-danger px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt" aria-hidden="true"></i></a>
+                                        <a class="btn btn-sm btn-round btn-link text-danger px-3 mb-0" href="<?= site_url('kelas/deleteSiswaFromKelas/' . $idkelas . '/' . $row->id_siswa) ?>"><i class="far fa-trash-alt" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                                 <?php } ?>
@@ -340,6 +340,20 @@ class Kelas extends CI_Controller{
             redirect($_SERVER['HTTP_REFERER']);
         }else{
             $this->session->set_flashdata('error', "Tidak Ada Siswa Yang Di Pilih");
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+    }
+
+    function deleteSiswaFromKelas($idkelas, $idsiswa){
+        $this->db->where([
+            'id_kelas' => $idkelas,
+            'id_siswa' => $idsiswa
+        ])->delete('mutasi');
+        if($this->db->affected_rows() > 0){
+            $this->session->set_flashdata('sukses', 'Siswa Berhasil Di Hapus');
+            redirect($_SERVER['HTTP_REFERER']);
+        }else{
+            $this->session->set_flashdata('error', 'Siswa Gagal Di Hapus');
             redirect($_SERVER['HTTP_REFERER']);
         }
     }
