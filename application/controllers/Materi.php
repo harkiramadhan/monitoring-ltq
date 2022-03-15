@@ -110,7 +110,7 @@ class Materi extends CI_Controller{
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                            <div class="card-footer text-center">
                                 <button type="submit" class="btn btn-sm btn-round bg-success btn-lg w-100 mt-4 mb-0 text-white"><i class="fas fa-save me-2"></i>Simpan</button>
                                 <button type="button" class="btn btn-sm btn-link btn-block  ml-auto" data-bs-dismiss="modal">Batal</button>
                             </div>
