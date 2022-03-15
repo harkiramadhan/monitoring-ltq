@@ -16,8 +16,7 @@ $(document).ready(function(){
     if(activeCardDetail){
         getDetail(activeCardDetail)
     }
-
-
+    
     $('.btn-detail').click(function(){
         var id = $(this).attr('data-id')
         getDetail(id)
