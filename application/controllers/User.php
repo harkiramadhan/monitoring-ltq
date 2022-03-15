@@ -70,6 +70,10 @@ class User extends CI_Controller{
 
     function update($iduser){
         if($this->input->post('password', TRUE)){
+            if($this->input->post('password', TRUE) == $this->input->post('passwordd', TRUE)){}else{
+                $this->session->set_flashdata('error', "Password Tidak Cocok");
+                redirect($_SERVER['HTTP_REFERER']);
+            }
             $datas = [
                 'password' => $this->input->post('password', TRUE),
                 'id_guru' => $this->input->post('id_guru', TRUE),
@@ -153,21 +157,37 @@ class User extends CI_Controller{
                                 <div class="col-lg-6">
                                     <label>Password <small class="text-danger">*</small></label>
                                     <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" name="password" id="input-password">
+                                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" name="password" id="input-password-2">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label>Ulangi Password <small class="text-danger text-confirm">*</small></label>
+                                    <label>Ulangi Password <small class="text-danger text-confirm-2">*</small></label>
                                     <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" name="password" id="confirm-password">
+                                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" name="passwordd" id="confirm-password-2">
                                     </div>
                                 </div>
                             </div>
                             <hr class="horizontal dark">
-                            <button type="submit" class="btn btn-sm btn-round bg-success btn-lg w-100 mb-0 text-white btn-submit"><i class="fas fa-save me-2"></i>Simpan</button>
+                            <button type="submit" class="btn btn-sm btn-round bg-success btn-lg w-100 mb-0 text-white"><i class="fas fa-save me-2"></i>Simpan</button>
                         </div>
                     </div>
                 </form>
+                <script>
+                    var inputPassword = $('#input-password-2')
+                        $('#confirm-password-2').on('input', function(){
+                            if(inputPassword.length > 0){
+                                if(inputPassword.val() === $(this).val()){
+                                    $(this).removeClass('is-invalid')
+                                    $(this).addClass('is-valid')
+                                    $('.text-confirm-2').text('*')
+                                }else{
+                                    $(this).addClass('is-invalid')
+                                    $(this).removeClass('is-valid')
+                                    $('.text-confirm-2').text('*) Password Tidak Cocok')
+                                }
+                            }
+                        })
+                </script>
             <?php
         }
 
