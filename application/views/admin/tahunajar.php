@@ -18,12 +18,14 @@
                             <div class="d-flex flex-column justify-content-center">
                                 <h6 class="mb-0 ms-3 text-sm <?= ($row->status == 1) ? 'text-white' : '' ?>"><strong><?= $row->tahun_awal."/".$row->tahun_akhir." - Semester ".$row->semester ?></strong></h6>
                             </div>
-                            <div class="ms-auto text-end">
-                                <?php if($row->status != 1): ?>
-                                    <button type="button" class="btn btn-sm btn-round btn-success text-white px-3 mb-0 btn-active" data-id="<?= $row->id ?>"><i class="fas fa-check me-2" aria-hidden="true"></i>Aktif</button>
-                                <?php endif; ?>
-                                <button type="button" class="btn btn-sm btn-round btn-dark text-white px-3 mb-0 btn-detail" data-id="<?= $row->id ?>"><i class="fas fa-eye me-2" aria-hidden="true"></i>Detail</button>
-                                <a class="btn btn-sm btn-round btn-link text-danger px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt" aria-hidden="true"></i></a>
+                            <div class="ms-auto text-end d-flex flex-column justify-content-center">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <?php if($row->status != 1): ?>
+                                        <button type="button" class="btn btn-sm btn-round btn-success text-white px-3 mb-0 btn-active" data-id="<?= $row->id ?>"><i class="fas fa-check me-2" aria-hidden="true"></i>Aktif</button>
+                                    <?php endif; ?>
+                                    <button type="button" class="btn btn-sm btn-round <?= ($row->status !=1) ? 'rounded' : '' ?> btn-dark text-white px-3 mb-0 btn-detail mx-1" data-id="<?= $row->id ?>"><i class="fas fa-eye me-2" aria-hidden="true"></i>Detail</button>
+                                    <button type="button" class="btn btn-sm btn-round btn-link text-danger px-3 mb-0"><i class="far fa-trash-alt" aria-hidden="true"></i></button>
+                                </div>
                             </div>
                         </li>
                     <?php } ?>

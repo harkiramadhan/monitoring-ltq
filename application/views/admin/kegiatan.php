@@ -1,13 +1,13 @@
 <div class="row">
-    <div class="col-md-6 mt-4">
+    <div class="col-md-7 mt-4">
         <div class="card">
             <div class="card-header pb-0 px-3">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h6 class="mb-0"><strong>Daftar Kelas</strong></h6>
+                        <h6 class="mb-0"><strong>Daftar Kegiatan</strong></h6>
                     </div>
                     <div class="col-lg-4 text-end">
-                        <button class="btn btn-sm btn-round bg-gradient-dark mb-0" type="button" data-bs-toggle="modal" data-bs-target="#addKelas"><i class="fas fa-plus me-3" aria-hidden="true"></i>Kelas</button>
+                        <button class="btn btn-sm btn-round bg-gradient-dark mb-0" type="button" data-bs-toggle="modal" data-bs-target="#addKegiatan"><i class="fas fa-plus me-3" aria-hidden="true"></i>Kegiatan</button>
                     </div>
                 </div>
             </div>
@@ -15,21 +15,21 @@
                 <div class="form-group mb-3">
                     <div class="input-group">
                         <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                        <input class="form-control" placeholder="Cari Kelas ..." id="myInput" type="text">
+                        <input class="form-control" placeholder="Cari Kegiatan ..." id="myInput" type="text">
                     </div>
                 </div>
                 <ul class="list-group">
-                    <?php foreach($kelas->result() as $row){ ?>
+                    <?php foreach($kegiatan->result() as $row){ ?>
                         <li class="list-group-item border-0 d-flex p-2 mb-2 bg-gray-100 border-radius-lg">
                             <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 ms-2 text-sm"><strong><?= $row->kelas ?></strong></h6>
-                                <small class="mb-0 ms-2 text-sm"><?= $row->nama ?></small>
+                                <h6 class="mb-0 ms-2 text-sm"><i class="fas fa-calendar me-2"></i><strong><?= $row->kegiatan ?></strong></h6>
+                                <h6 class="mb-0 ms-2 text-sm"><i class="fas fa-clock me-2"></i><strong><?= longdate_indo($row->waktu) ?></strong></h6>
+                                <h6 class="mb-0 ms-2 text-sm"><i class="fas fa-map-marker me-2"></i><strong><?= $row->tempat ?></strong></h6>
                             </div>
                             <div class="ms-auto text-end d-flex flex-column justify-content-center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-sm btn-round btn-info text-white px-3 mb-0 btn-edit" data-id="<?= $row->id ?>"><i class="fas fa-pencil-alt me-2" aria-hidden="true"></i>Edit</button>
-                                    <button type="button" class="btn btn-sm btn-round rounded btn-dark text-white px-3 mb-0 btn-detail mx-1" data-id="<?= $row->id ?>"><i class="fas fa-eye me-2" aria-hidden="true"></i>Detail</button>
-                                    <a class="btn btn-sm btn-round btn-link text-danger px-3 mb-0" href="<?= site_url('kelas/delete/' . $row->id) ?>"><i class="far fa-trash-alt" aria-hidden="true"></i></a>
+                                    <button type="button" class="btn btn-sm btn-round btn-dark text-white px-3 mb-0 btn-detail mx-1" data-id="<?= $row->id ?>"><i class="fas fa-eye me-2" aria-hidden="true"></i>Detail</button>
+                                    <a class="btn btn-sm btn-round btn-link text-danger px-3 mb-0" href="<?= site_url('kegiatan/delete/' . $row->id) ?>"><i class="far fa-trash-alt" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </li>
@@ -38,39 +38,40 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 mt-4 div-detail">
+    <div class="col-md-5 mt-4 div-detail">
         
     </div>
 </div>
 
 <!-- Modals -->
-<div class="modal fade" id="addKelas" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+<div class="modal fade" id="addKegiatan" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="card card-plain">
                     <div class="card-header pb-0 text-left">
-                        <h5 class="font-weight-bolder">Tambah Kelas</h5>
+                        <h5 class="font-weight-bolder">Tambah Kegiatan</h5>
                     </div>
                     <div class="card-body pb-0">
-                        <form action="<?= site_url('kelas/create') ?>" role="form text-left" method="post">
+                        <form action="<?= site_url('kegiatan/create') ?>" role="form text-left" method="post">
                             <input type="hidden" name="id_tahunajar" value="<?= $tahunajar->id ?>">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Guru <small class="text-danger">*</small></label>
-                                        <select name="id_guru" class="form-control" id="exampleFormControlSelect1" required>
-                                            <option value="" selected disabled>- Pilih Guru</option>
-                                            <?php foreach($guru->result() as $rg){ ?>
-                                                <option value="<?= $rg->id ?>"><?= $rg->nama ?></option>
-                                            <?php } ?>
-                                        </select>
+                                    <label>Nama Kegiatan <small class="text-danger">*</small></label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Nama Kegiatan" aria-label="Nama Kegiatan" name="kegiatan" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
-                                    <label>Nama Kelas <small class="text-danger">*</small></label>
+                                <div class="col-lg-8">
+                                    <label>Tempat Kegiatan <small class="text-danger">*</small></label>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Nama Kelas" aria-label="Nama Kelas" name="kelas" required>
+                                        <input type="text" class="form-control" placeholder="Tempat Kegiatan" aria-label="Tempat Kegiatan" name="tempat" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Waktu Kegiatan <small class="text-danger">*</small></label>
+                                    <div class="input-group mb-3">
+                                        <input type="date" class="form-control" placeholder="Waktu Kegiatan" aria-label="Waktu Kegiatan" name="waktu" required>
                                     </div>
                                 </div>
                             </div>
