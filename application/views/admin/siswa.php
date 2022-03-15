@@ -7,8 +7,8 @@
                         <h6 class="mb-0"><strong>Daftar Siswa</strong></h6>
                     </div>
                     <div class="col-lg-6 text-end">
-                        <a class="btn btn-sm btn-round bg-gradient-default mb-0" href="<?= site_url('siswa/import') ?>"><i class="fas fa-upload me-3" aria-hidden="true"></i>Siswa</a>
-                        <button class="btn btn-sm btn-round bg-gradient-dark mb-0 me-2" type="button" data-bs-toggle="modal" data-bs-target="#addSiswa"><i class="fas fa-plus me-3" aria-hidden="true"></i>Siswa</button>
+                        <a class="btn btn-sm btn-round bg-gradient-default mb-0 me-2" href="<?= site_url('siswa/import') ?>"><i class="fas fa-upload me-3" aria-hidden="true"></i>Siswa</a>
+                        <button class="btn btn-sm btn-round bg-gradient-dark mb-0" type="button" data-bs-toggle="modal" data-bs-target="#addSiswa"><i class="fas fa-plus me-3" aria-hidden="true"></i>Siswa</button>
                     </div>
                 </div>
             </div>
