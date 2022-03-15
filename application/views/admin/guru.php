@@ -13,6 +13,12 @@
                 </div>
             </div>
             <div class="card-body pt-4 p-3">
+                <div class="form-group mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                        <input class="form-control" placeholder="Cari Guru ..." id="myInput" type="text">
+                    </div>
+                </div>
                 <ul class="list-group">
                     <?php foreach($guru->result() as $row){ ?>
                         <li class="list-group-item border-0 d-flex p-2 mb-2 bg-gray-100 border-radius-lg">
