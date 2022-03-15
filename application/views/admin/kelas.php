@@ -87,9 +87,9 @@
 </div>
 
 <!-- Modal Edit -->
-<div class="modal fade" id="editSiswa" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+<div class="modal fade" id="editKelas" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content modal-content-add">
+        <div class="modal-content modal-content-edit">
 
         </div>
     </div>
