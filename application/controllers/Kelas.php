@@ -151,8 +151,8 @@ class Kelas extends CI_Controller{
                             type: 'post',
                             data : {idkelas : idkelas},
                             success: function(res){
-                                $('.modal-content-add').html(res)
-                                $('#editSiswa').modal('show')
+                                $('.modal-content-edit').html(res)
+                                $('#editKelas').modal('show')
                             }
                         })
                     })
