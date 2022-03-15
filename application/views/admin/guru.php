@@ -3,10 +3,11 @@
         <div class="card">
             <div class="card-header pb-0 px-3">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-6">
                         <h6 class="mb-0"><strong>Daftar Guru</strong></h6>
                     </div>
-                    <div class="col-lg-4 text-end">
+                    <div class="col-lg-6 text-end">
+                        <a class="btn btn-sm btn-round bg-gradient-default mb-0" href="<?= site_url('guru/import') ?>"><i class="fas fa-upload me-3" aria-hidden="true"></i>Guru</a>
                         <button class="btn btn-sm btn-round bg-gradient-dark mb-0" type="button" data-bs-toggle="modal" data-bs-target="#addGuru"><i class="fas fa-plus me-3" aria-hidden="true"></i>Guru</button>
                     </div>
                 </div>

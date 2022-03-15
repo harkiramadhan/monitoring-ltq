@@ -3,21 +3,31 @@
         <div class="card">
             <div class="card-header pb-0 px-3">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-6">
                         <h6 class="mb-0"><strong>Daftar Siswa</strong></h6>
                     </div>
-                    <div class="col-lg-4 text-end">
-                        <button class="btn btn-sm btn-round bg-gradient-dark mb-0" type="button" data-bs-toggle="modal" data-bs-target="#addSiswa"><i class="fas fa-plus me-3" aria-hidden="true"></i>Siswa</button>
+                    <div class="col-lg-6 text-end">
+                        <a class="btn btn-sm btn-round bg-gradient-default mb-0" href="<?= site_url('siswa/import') ?>"><i class="fas fa-upload me-3" aria-hidden="true"></i>Siswa</a>
+                        <button class="btn btn-sm btn-round bg-gradient-dark mb-0 me-2" type="button" data-bs-toggle="modal" data-bs-target="#addSiswa"><i class="fas fa-plus me-3" aria-hidden="true"></i>Siswa</button>
                     </div>
                 </div>
             </div>
             <div class="card-body pt-4 p-3">
                 <ul class="list-group">
-                    <?php foreach($siswa->result() as $row){ ?>
+                    <?php 
+                        foreach($siswa->result() as $row){ 
+                            $cekKelas = $this->db->select('k.kelas')
+                                                ->from('mutasi m')
+                                                ->join('kelas k', 'm.id_kelas = k.id')
+                                                ->where([
+                                                    'm.id_tahunajar' => $tahunajar->id,
+                                                    'm.id_siswa' => $row->id
+                                                ])->get();
+                    ?>
                         <li class="list-group-item border-0 d-flex p-2 mb-2 bg-gray-100 border-radius-lg">
                             <div class="d-flex flex-column justify-content-center">
                                 <h6 class="mb-0 ms-2 text-sm"><strong><?= $row->nama ?></strong> &nbsp;&nbsp;<span class="badge bg-gradient-primary"><?= $row->jenkel ?></span></h6>
-                                <small class="mb-0 ms-2 text-sm"><?= @$row->kelas ?>Kelas 1</small>
+                                <small class="mb-0 ms-2 text-sm"><?= @$cekKelas->row()->kelas ?></small>
                             </div>
                             <div class="ms-auto text-end">
                                 <button type="button" class="btn btn-sm btn-round btn-dark text-white px-3 mb-0 btn-detail" data-id="<?= $row->id ?>"><i class="fas fa-eye me-2" aria-hidden="true"></i>Detail</button>

@@ -203,4 +203,8 @@ class Siswa extends CI_Controller{
             redirect($_SERVER['HTTP_REFERER']);
         }
     }
+
+    function import(){
+        
+    }
 }
