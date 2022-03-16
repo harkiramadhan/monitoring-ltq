@@ -74,22 +74,6 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?= ($this->uri->segment(1) == 'tahunajar') ? 'active' : '' ?>" href="<?= site_url('tahunajar') ?>">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1"><strong>Semester</strong></span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?= ($this->uri->segment(1) == 'guru') ? 'active' : '' ?>" href="<?= site_url('guru') ?>">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1"><strong>Guru</strong></span>
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link <?= ($this->uri->segment(1) == 'siswa') ? 'active' : '' ?>" href="<?= site_url('siswa') ?>">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
@@ -98,27 +82,19 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?= ($this->uri->segment(1) == 'kelas') ? 'active' : '' ?>" href="<?= site_url('kelas') ?>">
+          <a class="nav-link <?= ($this->uri->segment(1) == 'absensi') ? 'active' : '' ?>" href="<?= site_url('absensi') ?>">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1"><strong>Kelas</strong></span>
+            <span class="nav-link-text ms-1"><strong>Absensi</strong></span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?= ($this->uri->segment(1) == 'kegiatan') ? 'active' : '' ?>" href="<?= site_url('kegiatan') ?>">
+          <a class="nav-link <?= ($this->uri->segment(1) == 'mutabaah') ? 'active' : '' ?>" href="<?= site_url('mutabaah') ?>">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-info text-sm opacity-10"></i>
+              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1"><strong>Kegiatan</strong></span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?= ($this->uri->segment(1) == 'materi') ? 'active' : '' ?>" href="<?= site_url('materi') ?>">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1"><strong>Materi</strong></span>
+            <span class="nav-link-text ms-1"><strong>Mutabaah</strong></span>
           </a>
         </li>
         <li class="nav-item mt-3">
