@@ -4,7 +4,8 @@ class Dashboard extends CI_Controller{
         parent::__construct();
         $this->load->model([
             'Muser',
-            'Mlembaga'
+            'Mlembaga',
+            'Mtahunajar'
         ]);
 
         if($this->session->userdata('masuk') != TRUE)
@@ -16,11 +17,13 @@ class Dashboard extends CI_Controller{
         $idlembaga = $this->session->userdata('idlembaga');
         $role = $this->session->userdata('role');
         $roleString = $this->session->userdata('role_string');
+        $tahunajar = $this->Mtahunajar->getActiveLembaga($idlembaga);
 
         $var = [
             'title' => 'Dashboard',
             'user' => $this->Muser->getSelected($userid),
-            'lembaga' => $this->Mlembaga->getSelected($idlembaga)
+            'lembaga' => $this->Mlembaga->getSelected($idlembaga),
+            'tahunajar' => $tahunajar,
         ];
 
         $this->load->view( $roleString . '/layout/header', $var);
