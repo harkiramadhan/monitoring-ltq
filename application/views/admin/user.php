@@ -30,7 +30,9 @@
                             <div class="ms-auto text-end d-flex flex-column justify-content-center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <button type="button" class="btn btn-sm btn-round btn-dark text-white px-3 mb-0 btn-detail" data-id="<?= $row->id ?>"><i class="fas fa-eye me-2" aria-hidden="true"></i>Detail</button>
-                                    <a class="btn btn-sm btn-round btn-link text-danger px-3 mb-0" href="<?= site_url('user/delete/' . $row->id) ?>"><i class="far fa-trash-alt" aria-hidden="true"></i></a>
+                                    <?php if($this->session->userdata('userid') != $row->id): ?>
+                                        <a class="btn btn-sm btn-round btn-link text-danger px-3 mb-0" href="<?= site_url('user/delete/' . $row->id) ?>"><i class="far fa-trash-alt" aria-hidden="true"></i></a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </li>
